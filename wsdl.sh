@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ ! -x wsdl2go ]; then
-    go get -u github.com/hooklift/wsdl2go/...
+if [ ! -x gowsdl ]; then
+    go get -u github.com/hooklift/gowsdl/...
 fi
 
 export PATH="$PATH:$1/bin"
@@ -67,6 +67,5 @@ https://adwords.google.com/api/adwords/cm/$version/TrialService?wsdl \
   #mkdir -p ${service}
   #wsdl2go -p googleadsinofficial -i ${service}.wsdl -o ${service}/${service}.go
   package=$(echo "${service/Service/}" | tr '[:upper:]' '[:lower:]')
-  mkdir -p ${package}
-  wsdl2go -p ${package} < ${service}.wsdl > ${package}/${service}.go
+  gowsdl -o ${service}.go -p ${package} ${service}.wsdl
 done
