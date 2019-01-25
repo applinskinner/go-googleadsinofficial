@@ -66,5 +66,6 @@ https://adwords.google.com/api/adwords/cm/$version/TrialService?wsdl \
 
   #mkdir -p ${service}
   #wsdl2go -p googleadsinofficial -i ${service}.wsdl -o ${service}/${service}.go
-  gowsdl -o ${service}.go -p ${service} ${service}.wsdl
+  package=$(echo "${service/Service/}" | tr '[:upper:]' '[:lower:]')
+  gowsdl -o ${service}.go -p ${package} ${service}.wsdl
 done
